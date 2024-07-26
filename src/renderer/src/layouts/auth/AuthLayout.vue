@@ -19,7 +19,7 @@
 const { ipcRenderer } = window.electron
 
 // 关闭窗口
-const closeWindow = () => {
+const closeWindow = (): void => {
   ipcRenderer.send('quit:application')
 }
 </script>

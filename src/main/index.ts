@@ -2,18 +2,18 @@ import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from 'e
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 
 // 引入模块
-import { switchWindow } from './modules/switch';
+import { switchWindow } from './modules/switch'
 
-import CommonWindow from './window/common';
-import { ElectronWindowType } from './window-type';
-import WindowFactory from './window';
-import { quitWindow } from './modules/close';
+import CommonWindow from './window/common'
+import { ElectronWindowType } from './window-type'
+import WindowFactory from './window'
+import { quitWindow } from './modules/close'
 
-let win: CommonWindow | null = null;
+let win: CommonWindow | null = null
 
-const gotTheLock = app.requestSingleInstanceLock();
+const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) {
-  app.exit();
+  app.exit()
 }
 
 function createWindow(): void {
@@ -26,7 +26,7 @@ quitWindow()
 
 // 切换窗口
 ipcMain.on('switch:window', (_event: IpcMainEvent, winType: ElectronWindowType) => {
-  win = switchWindow(winType, win?.getWindow() as BrowserWindow);
+  win = switchWindow(winType, win?.getWindow() as BrowserWindow)
 })
 
 let token: string | null = null

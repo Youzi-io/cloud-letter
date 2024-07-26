@@ -1,15 +1,15 @@
-import { ElectronWindowType } from '../window-type';
-import AuthWindow from './authWindow';
-import MainWindow from './mainWindow';
+import { ElectronWindowType } from '../window-type'
+import AuthWindow from './authWindow'
+import MainWindow from './mainWindow'
 
 // 实现工厂方法
-export default class WindowFactory{
-  static createWindow(winType:string) {
+export default class WindowFactory {
+  static createWindow(winType: string) {
     switch (winType) {
       case ElectronWindowType.Auth:
-        return new AuthWindow();
+        return new AuthWindow()
       case ElectronWindowType.Main:
-        return new MainWindow();
+        return new MainWindow()
       default:
         throw new Error(`Invalid animal type: ${winType}`)
     }
