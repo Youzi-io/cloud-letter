@@ -5,7 +5,7 @@ import router from './plugins/router'
 // 初始化样式
 import './styles/reset.css'
 import './styles/global.scss'
-import '../../../resources/font/font.css?asset'
+import './styles/font/font.css'
 
 const app = createApp(App)
 
