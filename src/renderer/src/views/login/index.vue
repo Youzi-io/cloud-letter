@@ -1,5 +1,6 @@
 <template>
   <div>
+    <span class="material-symbols-outlined"> Person </span>
     <button @click="switchWindow">切换窗口</button>
   </div>
 </template>
@@ -14,4 +15,4 @@ const switchWindow = () => {
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>
