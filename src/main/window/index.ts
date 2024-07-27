@@ -1,6 +1,6 @@
-import { ElectronWindowType } from '../window-type'
-import AuthWindow from './authWindow'
-import MainWindow from './mainWindow'
+import { ElectronWindowType } from './modules/window-type'
+import AuthWindow from './modules/authWindow'
+import MainWindow from './modules/mainWindow'
 
 // 实现工厂方法
 export default class WindowFactory {

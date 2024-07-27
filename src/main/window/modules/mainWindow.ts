@@ -1,8 +1,8 @@
-import { ElectronWindowType } from '../window-type'
+import { ElectronWindowType } from './window-type'
 import CommonWindow from './common'
 import { join } from 'path'
 
-const icon = join(__dirname, '../../../resources/icon.png')
+const icon = join(__dirname, '/resources/icon.png')
 
 export default class MainWindow extends CommonWindow {
   constructor() {

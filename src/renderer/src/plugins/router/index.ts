@@ -1,5 +1,5 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
-import { ElectronWindowType } from '@main/window-type'
+import { ElectronWindowType } from '@main/window/modules/window-type'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,7 +28,7 @@ const routes: Array<RouteRecordRaw> = [
         path: '/login',
         name: 'login',
         component: () => import('@renderer/views/login/index.vue'),
-        meta: { title: '首页' }
+        meta: { title: '登录' }
       }
     ]
   }

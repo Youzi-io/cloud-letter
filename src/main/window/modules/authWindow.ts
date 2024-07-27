@@ -1,17 +1,17 @@
-import { ElectronWindowType } from '../window-type'
+import { ElectronWindowType } from './window-type'
 import CommonWindow from './common'
 import { join } from 'path'
 
-const icon = join(__dirname, '../../../resources/icon.png')
+const icon = join(__dirname, '/resources/icon.png')
 
 export default class AuthWindow extends CommonWindow {
   constructor() {
     super({
-      width: 300,
-      height: 450,
+      width: 400,
+      height: 600,
       show: false,
-      // frame: false, // 无边框
-      // resizable: false, // 不允许改变窗口大小
+      frame: false, // 无边框
+      resizable: false, // 不允许改变窗口大小
       ...(process.platform === 'linux' ? { icon } : {}),
       webPreferences: {
         // Use pluginOptions.nodeIntegration, leave this alone

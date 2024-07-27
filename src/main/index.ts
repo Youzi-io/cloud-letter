@@ -2,12 +2,12 @@ import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from 'e
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 
 // 引入模块
-import { switchWindow } from './modules/switch'
+import { switchWindow } from './operate/switch'
 
-import CommonWindow from './window/common'
-import { ElectronWindowType } from './window-type'
+import CommonWindow from './window/modules/common'
+import { ElectronWindowType } from './window/modules/window-type'
 import WindowFactory from './window'
-import { quitWindow } from './modules/close'
+import { quitWindow } from './operate/close'
 
 let win: CommonWindow | null = null
 
