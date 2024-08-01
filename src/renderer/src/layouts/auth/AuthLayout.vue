@@ -2,10 +2,16 @@
   <div class="window">
     <!-- 顶部 -->
     <div class="top">
-      <div class="top_title">social</div>
+      <div class="top_title">云涵</div>
       <div class="top_operation">
+        <!-- 最小化按钮 -->
+        <div class="remove">
+          <MSIcon name="Remove" size="20" />
+        </div>
         <!-- 退出按钮 -->
-        <div class="close-bold" @click="closeWindow">X</div>
+        <div class="close-bold" @click="closeWindow">
+          <MSIcon name="Close" size="20" />
+        </div>
       </div>
     </div>
     <!-- 内容区 -->
@@ -16,6 +22,7 @@
 </template>
 
 <script setup lang="ts">
+import MSIcon from '@renderer/components/MSIcon/index.vue'
 const { ipcRenderer } = window.electron
 
 // 关闭窗口
@@ -27,8 +34,8 @@ const closeWindow = (): void => {
 <style lang="scss" scoped>
 // 窗口大小
 .window {
-  width: 300px;
-  height: 450px;
+  width: 400px;
+  height: 600px;
   overflow: hidden;
 }
 
@@ -37,15 +44,18 @@ const closeWindow = (): void => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 30px;
-  padding-left: 10px;
+  height: 26px;
   user-select: none;
 
   &_title {
     flex: 1;
+    width: 100%;
+    height: 100%;
+    line-height: 26px;
     -webkit-app-region: drag;
     color: rgb(121, 121, 121);
     font-size: 14px;
+    padding-left: 10px;
   }
 
   &_operation {
@@ -55,7 +65,8 @@ const closeWindow = (): void => {
     justify-content: center;
 
     > div {
-      width: 30px;
+      width: 34px;
+
       flex-grow: 1;
       cursor: pointer;
       height: 100%;
@@ -64,12 +75,13 @@ const closeWindow = (): void => {
       justify-content: center;
       color: rgb(121, 121, 121);
       font-size: 14px;
+      transition: all 0.3s;
 
-      &.tools:hover {
-        background-color: rgb(227, 227, 227);
+      &.remove:hover {
+        background-color: #e8e8e8;
       }
       &.close-bold:hover {
-        background-color: rgb(251, 115, 115);
+        background-color: #fb7373;
         color: #fff;
       }
     }
@@ -79,8 +91,6 @@ const closeWindow = (): void => {
 // 内容区
 .content {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 100%;
 }
 </style>
