@@ -36,6 +36,7 @@
 import { FormInstance, FormRules } from 'element-plus'
 import MSIcon from '@renderer/components/MSIcon/index.vue'
 import { ref } from 'vue'
+import { PASSWORD_REGEX } from '@renderer/constants/regex'
 
 const { ipcRenderer } = window.electron
 
@@ -53,6 +54,8 @@ const loginForm = ref({
 const validatePass = (_rule, value: string, callback: (error?: Error) => void) => {
   if (value === '') {
     callback(new Error('请输入密码'))
+  } else if (!PASSWORD_REGEX.test(value)) {
+    callback(new Error('密码不小于6位不超过26位,并且由字母和数字组成'))
   } else {
     callback()
   }
