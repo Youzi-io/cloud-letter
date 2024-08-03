@@ -7,13 +7,13 @@ const routes: Array<RouteRecordRaw> = [
     name: 'MainLayout',
     component: () => import('@renderer/layouts/main/MainLayout.vue'),
     meta: { window: ElectronWindowType.Main },
-    redirect: 'index',
+    redirect: 'session',
     children: [
       {
-        path: '/index',
-        name: 'index',
-        component: () => import('@renderer/views/index/index.vue'),
-        meta: { title: '首页' }
+        path: '/session',
+        name: 'session',
+        component: () => import('@renderer/views/session/index.vue'),
+        meta: { title: '会话' }
       }
     ]
   },
