@@ -47,6 +47,7 @@ import { FormInstance, FormRules } from 'element-plus'
 import MSIcon from '@renderer/components/MSIcon/index.vue'
 import { ref } from 'vue'
 import { useCountDown } from '@renderer/hooks/useCountDown'
+import { PHONE_NUMBER_REGEX } from '@renderer/constants/regex'
 
 const { ipcRenderer } = window.electron
 
@@ -63,8 +64,18 @@ const loginForm = ref({
 
 const { promptText, isStatus, countDown } = useCountDown('获取验证码')
 
+const validatePhone = (_rule, value: string, callback: (error?: Error) => void) => {
+  if (value === '') {
+    callback(new Error('请输入手机号'))
+  } else if (!PHONE_NUMBER_REGEX.test(value)) {
+    callback(new Error('请输入正确的手机号'))
+  } else {
+    callback()
+  }
+}
+
 const rules = ref<FormRules<typeof loginForm>>({
-  phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
+  phone: [{ validator: validatePhone, trigger: 'blur' }],
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
 })
 

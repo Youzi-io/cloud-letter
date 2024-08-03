@@ -86,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { PASSWORD_REGEX } from '@renderer/constants/regex'
+import { PASSWORD_REGEX, PHONE_NUMBER_REGEX } from '@renderer/constants/regex'
 import { useCountDown } from '@renderer/hooks/useCountDown'
 import { FormInstance, FormRules } from 'element-plus'
 import { ref } from 'vue'
@@ -133,11 +133,21 @@ const validateConfirmPass = (_rule, value: string, callback: (error?: Error) => 
   }
 }
 
+const validatePhone = (_rule, value: string, callback: (error?: Error) => void) => {
+  if (value === '') {
+    callback(new Error('请输入手机号'))
+  } else if (!PHONE_NUMBER_REGEX.test(value)) {
+    callback(new Error('请输入正确的手机号'))
+  } else {
+    callback()
+  }
+}
+
 const rules = ref<FormRules<typeof registerForm>>({
   account: [{ required: true, message: '请输入账号', trigger: 'blur' }],
   password: [{ validator: validatePass, trigger: 'blur' }],
   checkPassword: [{ validator: validateConfirmPass, trigger: 'blur' }],
-  phone: [{ required: true, message: '请输入手机号', trigger: 'blur' }],
+  phone: [{ validator: validatePhone, trigger: 'blur' }],
   code: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
 })
 
@@ -164,8 +174,13 @@ const registerSubmit = (formEl: FormInstance | undefined) => {
     if (valid) {
       registerBtnLoading.value = true
       setTimeout(() => {
+        ElMessage({
+          message: '注册成功！',
+          type: 'success',
+          duration: 1000
+        })
         registerBtnLoading.value = false
-        console.log('submit!')
+        returnToLogin()
       }, 3000)
     } else {
       console.log('error submit!')
@@ -219,6 +234,8 @@ const registerSubmit = (formEl: FormInstance | undefined) => {
 
   .el-link {
     font-size: 16px;
+    text-align: center;
+    width: 80px;
   }
 }
 </style>
