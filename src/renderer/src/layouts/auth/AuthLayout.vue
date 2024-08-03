@@ -2,8 +2,8 @@
   <div class="window">
     <!-- 顶部 -->
     <div class="top">
-      <div class="top_title">云涵</div>
-      <div class="top_operation">
+      <div class="top-title">云涵</div>
+      <div class="top-operation">
         <!-- 最小化按钮 -->
         <div class="remove">
           <MSIcon name="Remove" size="20" />
@@ -47,7 +47,7 @@ const closeWindow = (): void => {
   height: 26px;
   user-select: none;
 
-  &_title {
+  &-title {
     flex: 1;
     width: 100%;
     height: 100%;
@@ -58,7 +58,7 @@ const closeWindow = (): void => {
     padding-left: 10px;
   }
 
-  &_operation {
+  &-operation {
     height: 100%;
     display: flex;
     align-items: center;
