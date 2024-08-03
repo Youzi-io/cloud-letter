@@ -7,8 +7,10 @@ const icon = join(__dirname, '/resources/icon.png')
 export default class MainWindow extends CommonWindow {
   constructor() {
     super({
-      width: 1200,
-      height: 800,
+      width: 912,
+      height: 642,
+      minWidth: 912,
+      minHeight: 642,
       show: false,
       frame: false, // 无边框
       ...(process.platform === 'linux' ? { icon } : {}),
