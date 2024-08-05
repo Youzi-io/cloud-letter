@@ -1,16 +1,20 @@
-import { app, BrowserWindow, ipcMain, IpcMainEvent, IpcMainInvokeEvent } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 
 // 引入模块
-import { switchWindow } from './operate/switch'
-
 import CommonWindow from './window/modules/common'
-import { ElectronWindowType } from './window/modules/window-type'
-import WindowFactory from './window'
-import { quitWindow } from './operate/close'
+import WindowFactory from './window/windowFactory'
+import initOperateEvent from './operateEvent'
 
-let win: CommonWindow | null = null
+export interface WinObj {
+  win: CommonWindow | null
+}
 
+const winObj: WinObj = {
+  win: null
+}
+
+// 防止多次启动（应用锁）
 const gotTheLock = app.requestSingleInstanceLock()
 if (!gotTheLock) {
   app.exit()
@@ -18,24 +22,11 @@ if (!gotTheLock) {
 
 function createWindow(): void {
   // Create the browser window.
-  win = WindowFactory.createWindow('auth')
+  winObj.win = WindowFactory.createWindow('auth')
 }
 
-// 注册事件
-quitWindow()
-
-// 切换窗口
-ipcMain.on('switch:window', (_event: IpcMainEvent, winType: ElectronWindowType) => {
-  win = switchWindow(winType, win?.getWindow() as BrowserWindow)
-})
-
-let token: string | null = null
-ipcMain.handle('push:transfer:data', async (_event: IpcMainInvokeEvent, data: string) => {
-  token = data
-})
-ipcMain.handle('pull:transfer:data', async () => {
-  return token
-})
+// 初始化事件
+initOperateEvent(winObj)
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
