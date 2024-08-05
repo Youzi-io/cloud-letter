@@ -1,8 +1,13 @@
 import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { switchWindow } from './api/switch'
+import { quitApp } from './api/quit'
 
 // Custom APIs for renderer
-const api = {}
+const api = {
+  ISwitchWindow: switchWindow,
+  IQuitApp: quitApp
+}
 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise

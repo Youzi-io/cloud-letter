@@ -23,11 +23,12 @@
 
 <script setup lang="ts">
 import MSIcon from '@renderer/components/MSIcon/index.vue'
-const { ipcRenderer } = window.electron
 
-// 关闭窗口
+const { IQuitApp } = window.api
+
+// 关闭app
 const closeWindow = (): void => {
-  ipcRenderer.send('quit:application')
+  IQuitApp()
 }
 </script>
 

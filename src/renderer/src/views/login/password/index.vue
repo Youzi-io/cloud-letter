@@ -38,7 +38,7 @@ import MSIcon from '@renderer/components/MSIcon/index.vue'
 import { ref } from 'vue'
 import { PASSWORD_REGEX } from '@renderer/constants/regex'
 
-const { ipcRenderer } = window.electron
+const { ISwitchWindow } = window.api
 
 const loginInputStyle = { height: '50px', fontSize: '18px' }
 
@@ -75,8 +75,7 @@ const loginSubmit = (formEl: FormInstance | undefined) => {
       setTimeout(() => {
         loginBtnLoading.value = false
         // 跳转窗口
-        ipcRenderer.invoke('push:transfer:data', 'a11111111')
-        ipcRenderer.send('switch:window', 'main')
+        ISwitchWindow('main')
       }, 3000)
       console.log('submit!')
     } else {
