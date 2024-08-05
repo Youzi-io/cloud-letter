@@ -2,11 +2,17 @@ import { contextBridge } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import { switchWindow } from './api/switch'
 import { quitApp } from './api/quit'
+import { minimizeWindow } from './api/minimize'
+import { maximizeWindow } from './api/maximize'
+import { closeWindow } from './api/close'
 
 // Custom APIs for renderer
 const api = {
   ISwitchWindow: switchWindow,
-  IQuitApp: quitApp
+  IQuitApp: quitApp,
+  IMinimizeWindow: minimizeWindow,
+  IMaximizeWindow: maximizeWindow,
+  ICloseWindow: closeWindow
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to
