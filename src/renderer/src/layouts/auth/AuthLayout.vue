@@ -37,6 +37,7 @@ const closeWindow = (): void => {
   width: 400px;
   height: 600px;
   overflow: hidden;
+  -webkit-app-region: drag;
 }
 
 // 顶部
@@ -48,11 +49,7 @@ const closeWindow = (): void => {
   user-select: none;
 
   &-title {
-    flex: 1;
-    width: 100%;
-    height: 100%;
     line-height: 26px;
-    -webkit-app-region: drag;
     color: rgb(121, 121, 121);
     font-size: 14px;
     padding-left: 10px;
@@ -63,6 +60,7 @@ const closeWindow = (): void => {
     display: flex;
     align-items: center;
     justify-content: center;
+    -webkit-app-region: no-drag;
 
     > div {
       width: 34px;

@@ -63,6 +63,7 @@ enum LoginMethodEnum {
   .el-link {
     font-size: 16px;
     margin-bottom: 10px;
+    -webkit-app-region: no-drag;
   }
 }
 </style>

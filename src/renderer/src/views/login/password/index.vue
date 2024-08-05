@@ -89,7 +89,10 @@ const loginSubmit = (formEl: FormInstance | undefined) => {
 <style lang="scss" scoped>
 .login-password {
   text-align: center;
+
   .el-form {
+    -webkit-app-region: no-drag;
+
     &-item {
       margin-bottom: 20px;
 

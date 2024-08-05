@@ -56,6 +56,7 @@ const closeWindow = (): void => {}
 .main {
   display: flex;
   height: 100%;
+  -webkit-app-region: drag;
 }
 
 .side {
@@ -65,7 +66,6 @@ const closeWindow = (): void => {}
   display: flex;
   flex-direction: column;
   align-items: center;
-  -webkit-app-region: drag;
 
   .el-avatar {
     user-select: none;
@@ -122,13 +122,11 @@ const closeWindow = (): void => {}
   right: 0;
   top: 0;
   z-index: 9;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 26px;
   user-select: none;
-
   -webkit-app-region: no-drag;
 
   &-title {
