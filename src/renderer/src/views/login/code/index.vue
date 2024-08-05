@@ -63,13 +63,17 @@ const loginForm = ref({
 })
 
 const { promptText, isStatus, countDown } = useCountDown('获取验证码')
+const isSendCode = ref(false)
 
 const validatePhone = (_rule, value: string, callback: (error?: Error) => void) => {
   if (value === '') {
+    isSendCode.value = false
     callback(new Error('请输入手机号'))
   } else if (!PHONE_NUMBER_REGEX.test(value)) {
+    isSendCode.value = false
     callback(new Error('请输入正确的手机号'))
   } else {
+    isSendCode.value = true
     callback()
   }
 }
@@ -80,7 +84,7 @@ const rules = ref<FormRules<typeof loginForm>>({
 })
 
 const sendCode = () => {
-  if (loginForm.value.phone) {
+  if (loginForm.value.phone && isSendCode.value) {
     countDown()
   } else {
     loginFormRef.value?.validateField('phone')
@@ -112,6 +116,8 @@ const loginSubmit = (formEl: FormInstance | undefined) => {
   text-align: center;
 
   .el-form {
+    -webkit-app-region: no-drag;
+
     &-item {
       margin-bottom: 20px;
 

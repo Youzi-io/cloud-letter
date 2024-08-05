@@ -107,6 +107,7 @@ const registerForm = ref({
 })
 
 const { promptText, isStatus, countDown } = useCountDown('获取验证码')
+const isSendCode = ref(false)
 
 const validatePass = (_rule, value: string, callback: (error?: Error) => void) => {
   if (value === '') {
@@ -135,10 +136,13 @@ const validateConfirmPass = (_rule, value: string, callback: (error?: Error) => 
 
 const validatePhone = (_rule, value: string, callback: (error?: Error) => void) => {
   if (value === '') {
+    isSendCode.value = false
     callback(new Error('请输入手机号'))
   } else if (!PHONE_NUMBER_REGEX.test(value)) {
+    isSendCode.value = false
     callback(new Error('请输入正确的手机号'))
   } else {
+    isSendCode.value = true
     callback()
   }
 }
@@ -154,7 +158,7 @@ const rules = ref<FormRules<typeof registerForm>>({
 const Router = useRouter()
 
 const sendCode = () => {
-  if (registerForm.value.phone) {
+  if (registerForm.value.phone && isSendCode.value) {
     countDown()
   } else {
     if (registerFormRef.value) {
@@ -203,6 +207,8 @@ const registerSubmit = (formEl: FormInstance | undefined) => {
   }
 
   .el-form {
+    -webkit-app-region: no-drag;
+
     &-item {
       margin-bottom: 20px;
 
@@ -236,6 +242,7 @@ const registerSubmit = (formEl: FormInstance | undefined) => {
     font-size: 16px;
     text-align: center;
     width: 80px;
+    -webkit-app-region: no-drag;
   }
 }
 </style>
