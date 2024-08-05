@@ -5,11 +5,11 @@
       <div class="top-title">云涵</div>
       <div class="top-operation">
         <!-- 最小化按钮 -->
-        <div class="remove">
+        <div class="remove" @click="minimizeWindow">
           <MSIcon name="Remove" size="20" />
         </div>
         <!-- 退出按钮 -->
-        <div class="close-bold" @click="closeWindow">
+        <div class="close-bold" @click="quitApp">
           <MSIcon name="Close" size="20" />
         </div>
       </div>
@@ -24,10 +24,15 @@
 <script setup lang="ts">
 import MSIcon from '@renderer/components/MSIcon/index.vue'
 
-const { IQuitApp } = window.api
+const { IQuitApp, IMinimizeWindow } = window.api
+
+// 最小化
+const minimizeWindow = (): void => {
+  IMinimizeWindow()
+}
 
 // 关闭app
-const closeWindow = (): void => {
+const quitApp = (): void => {
   IQuitApp()
 }
 </script>

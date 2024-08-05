@@ -24,11 +24,11 @@
       <div class="top">
         <div class="top-operation">
           <!-- 最小化按钮 -->
-          <div class="base">
+          <div class="base" @click="minimizeWindow">
             <MSIcon name="Remove" size="20" />
           </div>
           <!-- 最大化按钮 -->
-          <div class="base">
+          <div class="base" @click="maximizeWindow">
             <MSIcon name="Rectangle" size="20" />
           </div>
           <!-- 退出按钮 -->
@@ -46,10 +46,24 @@
 import { ref } from 'vue'
 import MSIcon from '@renderer/components/MSIcon/index.vue'
 
+const { IMinimizeWindow, IMaximizeWindow, ICloseWindow } = window.api
+
 const squareUrl = ref('http://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png')
 
-// 关闭窗口
-const closeWindow = (): void => {}
+// 最小化
+const minimizeWindow = (): void => {
+  IMinimizeWindow()
+}
+
+// 最大化
+const maximizeWindow = (): void => {
+  IMaximizeWindow()
+}
+
+// 关闭app
+const closeWindow = (): void => {
+  ICloseWindow()
+}
 </script>
 
 <style lang="scss" scoped>
