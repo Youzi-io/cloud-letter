@@ -42,6 +42,7 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  // 创建窗口
   createWindow()
 
   app.on('activate', function () {

@@ -16,3 +16,15 @@ export function closeWindow(winObj: WinObj) {
     }
   })
 }
+
+// 隐藏窗口
+export function hideWindow(winObj: WinObj) {
+  ipcMain.on('hide:window', () => {
+    if (winObj.win) {
+      const win = winObj.win.getWindow()
+      if (win) {
+        win.hide()
+      }
+    }
+  })
+}

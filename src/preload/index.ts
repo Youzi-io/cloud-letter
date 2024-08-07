@@ -5,6 +5,7 @@ import { quitApp } from './api/quit'
 import { minimizeWindow } from './api/minimize'
 import { maximizeWindow } from './api/maximize'
 import { closeWindow } from './api/close'
+import { hideWindow } from './api/hide'
 
 // Custom APIs for renderer
 const api = {
@@ -12,7 +13,8 @@ const api = {
   IQuitApp: quitApp,
   IMinimizeWindow: minimizeWindow,
   IMaximizeWindow: maximizeWindow,
-  ICloseWindow: closeWindow
+  ICloseWindow: closeWindow,
+  IHideWindow: hideWindow
 }
 
 // Use `contextBridge` APIs to expose Electron APIs to

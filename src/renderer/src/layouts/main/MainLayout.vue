@@ -31,8 +31,8 @@
           <div class="base" @click="maximizeWindow">
             <MSIcon name="Rectangle" size="20" />
           </div>
-          <!-- 退出按钮 -->
-          <div class="close-bold" @click="closeWindow">
+          <!-- 隐藏窗口按钮 -->
+          <div class="close-bold" @click="hideWindow">
             <MSIcon name="Close" size="20" />
           </div>
         </div>
@@ -46,7 +46,7 @@
 import { ref } from 'vue'
 import MSIcon from '@renderer/components/MSIcon/index.vue'
 
-const { IMinimizeWindow, IMaximizeWindow, ICloseWindow } = window.api
+const { IMinimizeWindow, IMaximizeWindow, IHideWindow } = window.api
 
 const squareUrl = ref('http://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png')
 
@@ -60,9 +60,9 @@ const maximizeWindow = (): void => {
   IMaximizeWindow()
 }
 
-// 关闭app
-const closeWindow = (): void => {
-  ICloseWindow()
+// 隐藏窗口
+const hideWindow = (): void => {
+  IHideWindow()
 }
 </script>
 

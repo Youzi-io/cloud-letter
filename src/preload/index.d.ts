@@ -13,4 +13,5 @@ interface CustomApi {
   IMinimizeWindow: () => void
   IMaximizeWindow: () => void
   ICloseWindow: () => void
+  IHideWindow: () => void
 }

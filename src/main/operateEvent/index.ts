@@ -1,4 +1,4 @@
-import { closeWindow, quitApp } from './close'
+import { closeWindow, hideWindow, quitApp } from './close'
 import { WinObj } from '..'
 import { ipcMain, IpcMainInvokeEvent } from 'electron'
 import { switchWindow } from './switch'
@@ -11,6 +11,7 @@ export default function initOperateEvent(winObj: WinObj) {
   switchWindow(winObj)
   minimizeWindow(winObj)
   maximizeWindow(winObj)
+  hideWindow(winObj)
 
   let token: string | null = null
   ipcMain.handle('push:transfer:data', async (_event: IpcMainInvokeEvent, data: string) => {
