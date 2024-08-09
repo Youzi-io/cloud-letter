@@ -1,4 +1,4 @@
-export enum ElectronWindowType {
+export enum WindowType {
   Auth = 'auth',
   Main = 'main'
 }

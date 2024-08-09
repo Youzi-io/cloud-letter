@@ -1,14 +1,18 @@
 import { ipcMain, IpcMainEvent } from 'electron'
-import { ElectronWindowType } from '../window/modules/window-type'
+import { WindowType } from '../window/modules/window-type'
 import WindowFactory from '../window/windowFactory'
-import { WinObj } from '..'
+import { WinMap } from '..'
 
 // 切换窗口
-export function switchWindow(winObj: WinObj) {
-  ipcMain.on('switch:window', (_event: IpcMainEvent, winType: ElectronWindowType) => {
-    if (winObj.win) {
-      winObj.win.close()
+export function switchWindow(winMap: WinMap) {
+  ipcMain.on('switch:window', (_: IpcMainEvent, winType: WindowType, closeWinType: WindowType) => {
+    if (winMap.get(closeWinType)) {
+      const win = winMap.get(closeWinType)?.getWindow()
+      if (win) {
+        win.close()
+        winMap.delete(winType)
+      }
     }
-    winObj.win = WindowFactory.createWindow(winType)
+    winMap.set(winType, WindowFactory.createWindow(winType))
   })
 }

@@ -4,18 +4,31 @@
       <el-avatar shape="square" :size="38" :src="squareUrl" />
       <!-- 功能菜单 -->
       <div class="menu">
-        <!-- 会话 -->
-        <div class="menu-item menu-item--hover">
-          <MSIcon name="Chat_Bubble" size="20" />
+        <!-- 菜单 -->
+        <div
+          v-for="(item, index) in menuList"
+          :key="index"
+          class="menu-item menu-item--hover"
+          @click="menuClick(item.path)"
+        >
+          <el-tooltip
+            :content="item.title"
+            placement="right"
+            effect="light"
+            :show-arrow="false"
+            :show-after="1000"
+          >
+            <MSIcon
+              :name="item.icon"
+              :size="item.size"
+              :class="{ 'menu-item-icon--active': Route.path == item.path }"
+            />
+          </el-tooltip>
         </div>
-        <!-- 联系人 -->
-        <div class="menu-item menu-item--hover">
-          <MSIcon name="Person" size="26" />
-        </div>
-        <!-- 分隔 -->
-        <div class="separation"></div>
-        <!-- 设置 -->
-        <div class="menu-item menu-item--hover">
+      </div>
+      <!-- 设置 -->
+      <div class="submenu">
+        <div class="submenu-item submenu-item--hover">
           <MSIcon name="Menu" size="20" />
         </div>
       </div>
@@ -43,27 +56,53 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import MSIcon from '@renderer/components/MSIcon/index.vue'
+import { useRoute, useRouter } from 'vue-router'
+import { WindowType } from '@main/window/modules/window-type'
 
 const { IMinimizeWindow, IMaximizeWindow, IHideWindow } = window.api
 
 const squareUrl = ref('http://cube.elemecdn.com/9/c2/f0ee8a3c7c9638a54940382568c9dpng.png')
 
+const Route = useRoute()
+const Router = useRouter()
+
+const menuList = ref([
+  {
+    title: '会话',
+    icon: 'Chat_Bubble',
+    path: '/session',
+    size: 20
+  },
+  {
+    title: '联系人',
+    icon: 'Person',
+    path: '/contact',
+    size: 26
+  }
+])
+
 // 最小化
 const minimizeWindow = (): void => {
-  IMinimizeWindow()
+  IMinimizeWindow(WindowType.Main)
 }
 
 // 最大化
 const maximizeWindow = (): void => {
-  IMaximizeWindow()
+  IMaximizeWindow(WindowType.Main)
 }
 
 // 隐藏窗口
 const hideWindow = (): void => {
-  IHideWindow()
+  IHideWindow(WindowType.Main)
 }
+
+const menuClick = (path: string): void => {
+  Router.push(path)
+}
+
+onMounted(() => {})
 </script>
 
 <style lang="scss" scoped>
@@ -89,10 +128,17 @@ const hideWindow = (): void => {
 
   .menu {
     flex: 1;
+    margin: 30px 0 0;
+  }
+  .submenu {
+    margin: 0 0 20px;
+  }
+
+  .menu,
+  .submenu {
     width: 38px;
     display: flex;
     flex-direction: column;
-    margin: 30px 0 20px;
     user-select: none;
 
     &-item {
@@ -116,10 +162,14 @@ const hideWindow = (): void => {
           background-color: rgba($color: #c4c4c4, $alpha: 0.3);
         }
       }
-    }
 
-    .separation {
-      flex: 1;
+      &-icon--active {
+        font-variation-settings:
+          'FILL' 1,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 20;
+      }
     }
   }
 }

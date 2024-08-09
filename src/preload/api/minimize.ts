@@ -1,5 +1,6 @@
 import { ipcRenderer } from 'electron'
+import { WindowType } from '../../main/window/modules/window-type'
 
-export function minimizeWindow() {
-  ipcRenderer.send('minimize:window')
+export function minimizeWindow(winType: WindowType) {
+  ipcRenderer.send('minimize:window', winType)
 }

@@ -1,17 +1,17 @@
 import { closeWindow, hideWindow, quitApp } from './close'
-import { WinObj } from '..'
+import { WinMap } from '..'
 import { ipcMain, IpcMainInvokeEvent } from 'electron'
 import { switchWindow } from './switch'
 import { minimizeWindow } from './minimize'
 import { maximizeWindow } from './maximize'
 
-export default function initOperateEvent(winObj: WinObj) {
+export default function initOperateEvent(winMap: WinMap) {
   quitApp()
-  closeWindow(winObj)
-  switchWindow(winObj)
-  minimizeWindow(winObj)
-  maximizeWindow(winObj)
-  hideWindow(winObj)
+  closeWindow(winMap)
+  switchWindow(winMap)
+  minimizeWindow(winMap)
+  maximizeWindow(winMap)
+  hideWindow(winMap)
 
   let token: string | null = null
   ipcMain.handle('push:transfer:data', async (_event: IpcMainInvokeEvent, data: string) => {

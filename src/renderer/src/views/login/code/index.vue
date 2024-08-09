@@ -48,6 +48,7 @@ import MSIcon from '@renderer/components/MSIcon/index.vue'
 import { ref } from 'vue'
 import { useCountDown } from '@renderer/hooks/useCountDown'
 import { PHONE_NUMBER_REGEX } from '@renderer/constants/regex'
+import { WindowType } from '@main/window/modules/window-type'
 
 const { ISwitchWindow } = window.api
 
@@ -100,7 +101,7 @@ const loginSubmit = (formEl: FormInstance | undefined) => {
       setTimeout(() => {
         loginBtnLoading.value = false
         // 跳转窗口
-        ISwitchWindow('main')
+        ISwitchWindow(WindowType.Main, WindowType.Auth)
       }, 3000)
       console.log('submit!')
     } else {

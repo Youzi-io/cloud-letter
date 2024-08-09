@@ -1,11 +1,14 @@
 import { ipcMain } from 'electron'
-import { WinObj } from '..'
+import { WinMap } from '..'
+import { WindowType } from '@main/window/modules/window-type'
 
-export function minimizeWindow(winObj: WinObj) {
-  ipcMain.on('minimize:window', () => {
-    if (winObj.win) {
-      const win = winObj.win.getWindow()
-      win && win.minimize()
+export function minimizeWindow(winMap: WinMap) {
+  ipcMain.on('minimize:window', (_, winType: WindowType) => {
+    if (winMap.get(winType)) {
+      const win = winMap.get(winType)?.getWindow()
+      if (win) {
+        win.minimize()
+      }
     }
   })
 }

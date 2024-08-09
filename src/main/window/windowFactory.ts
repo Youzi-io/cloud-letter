@@ -1,4 +1,4 @@
-import { ElectronWindowType } from './modules/window-type'
+import { WindowType } from './modules/window-type'
 import AuthWindow from './modules/authWindow'
 import MainWindow from './modules/mainWindow'
 
@@ -6,12 +6,12 @@ import MainWindow from './modules/mainWindow'
 export default class WindowFactory {
   static createWindow(winType: string) {
     switch (winType) {
-      case ElectronWindowType.Auth:
+      case WindowType.Auth:
         return new AuthWindow()
-      case ElectronWindowType.Main:
+      case WindowType.Main:
         return new MainWindow()
       default:
-        throw new Error(`Invalid animal type: ${winType}`)
+        throw new Error(`无效的窗口类型: ${winType}`)
     }
   }
 }

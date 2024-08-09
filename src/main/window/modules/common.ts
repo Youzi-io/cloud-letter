@@ -1,18 +1,18 @@
 import { BrowserWindow, shell, type BrowserWindowConstructorOptions } from 'electron'
-import { ElectronWindowType } from './window-type'
+import { WindowType } from './window-type'
 import { join } from 'path'
 import { is } from '@electron-toolkit/utils'
 
 import { trimEnd } from 'lodash'
 
 interface IBrowserWindowConstructorOptions extends BrowserWindowConstructorOptions {
-  windowType: ElectronWindowType
+  windowType: WindowType
   loadUrl: (host: string) => string
 }
 
 export default class CommonWindow {
   private win: BrowserWindow | null
-  private windowType: ElectronWindowType
+  private windowType: WindowType
   private loadUrlFormatter: IBrowserWindowConstructorOptions['loadUrl']
 
   constructor(options: IBrowserWindowConstructorOptions) {
@@ -56,7 +56,7 @@ export default class CommonWindow {
 
   /**
    * 获取窗口类型
-   * @returns {ElectronWindowType}
+   * @returns {WindowType}
    */
   getType() {
     return this.windowType

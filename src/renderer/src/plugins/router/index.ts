@@ -1,12 +1,12 @@
 import { RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router'
-import { ElectronWindowType } from '@main/window/modules/window-type'
+import { WindowType } from '@main/window/modules/window-type'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/main',
     name: 'MainLayout',
     component: () => import('@renderer/layouts/main/MainLayout.vue'),
-    meta: { window: ElectronWindowType.Main },
+    meta: { window: WindowType.Main },
     redirect: 'session',
     children: [
       {
@@ -14,6 +14,12 @@ const routes: Array<RouteRecordRaw> = [
         name: 'session',
         component: () => import('@renderer/views/session/index.vue'),
         meta: { title: '会话' }
+      },
+      {
+        path: '/contact',
+        name: 'contact',
+        component: () => import('@renderer/views/contact/index.vue'),
+        meta: { title: '联系人' }
       }
     ]
   },
@@ -21,7 +27,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/auth',
     name: 'AuthLayout',
     component: () => import('@renderer/layouts/auth/AuthLayout.vue'),
-    meta: { window: ElectronWindowType.Auth },
+    meta: { window: WindowType.Auth },
     redirect: 'login',
     children: [
       {

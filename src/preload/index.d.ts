@@ -8,10 +8,10 @@ declare global {
 }
 
 interface CustomApi {
-  ISwitchWindow: (winType: ElectronWindowType) => void
+  ISwitchWindow: (winType: WindowType, closeWinType: WindowType) => void
   IQuitApp: () => void
-  IMinimizeWindow: () => void
-  IMaximizeWindow: () => void
-  ICloseWindow: () => void
-  IHideWindow: () => void
+  IMinimizeWindow: (winType: WindowType) => void
+  IMaximizeWindow: (winType: WindowType) => void
+  ICloseWindow: (winType: WindowType) => void
+  IHideWindow: (winType: WindowType) => void
 }

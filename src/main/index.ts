@@ -5,14 +5,12 @@ import { electronApp, optimizer } from '@electron-toolkit/utils'
 import CommonWindow from './window/modules/common'
 import WindowFactory from './window/windowFactory'
 import initOperateEvent from './operateEvent'
+import { WindowType } from './window/modules/window-type'
 
-export interface WinObj {
-  win: CommonWindow | null
-}
+export type WinMap = Map<WindowType, CommonWindow>
 
-const winObj: WinObj = {
-  win: null
-}
+// 窗口实例map
+const winMap: WinMap = new Map()
 
 // 防止多次启动（应用锁）
 const gotTheLock = app.requestSingleInstanceLock()
@@ -22,11 +20,13 @@ if (!gotTheLock) {
 
 function createWindow(): void {
   // Create the browser window.
-  winObj.win = WindowFactory.createWindow('auth')
+  if (!winMap.get(WindowType.Auth)) {
+    winMap.set(WindowType.Auth, WindowFactory.createWindow(WindowType.Auth))
+  }
 }
 
 // 初始化事件
-initOperateEvent(winObj)
+initOperateEvent(winMap)
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

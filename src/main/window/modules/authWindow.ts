@@ -1,4 +1,4 @@
-import { ElectronWindowType } from './window-type'
+import { WindowType } from './window-type'
 import CommonWindow from './common'
 import { join } from 'path'
 import { app, Menu, Tray } from 'electron'
@@ -26,7 +26,7 @@ export default class AuthWindow extends CommonWindow {
         sandbox: false
         // webSecurity:false
       },
-      windowType: ElectronWindowType.Auth,
+      windowType: WindowType.Auth,
       loadUrl: (host) => `${host}#auth`
     })
     const win = this.getWindow()

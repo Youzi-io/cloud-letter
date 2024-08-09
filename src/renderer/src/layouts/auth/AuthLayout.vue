@@ -22,13 +22,14 @@
 </template>
 
 <script setup lang="ts">
+import { WindowType } from '@main/window/modules/window-type'
 import MSIcon from '@renderer/components/MSIcon/index.vue'
 
 const { IQuitApp, IMinimizeWindow } = window.api
 
 // 最小化
 const minimizeWindow = (): void => {
-  IMinimizeWindow()
+  IMinimizeWindow(WindowType.Auth)
 }
 
 // 关闭app
