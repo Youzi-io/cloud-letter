@@ -3,7 +3,7 @@
     <BaseContainer>
       <template #aside>
         <div class="upper">
-          <el-input v-model="search" style="width: 190px" placeholder="搜索">
+          <el-input v-model="search" style="max-width: 190px" placeholder="搜索">
             <template #prefix>123</template>
           </el-input>
         </div>
